@@ -55,7 +55,6 @@ def repeat_until_convergence(data, clusters, centroids):
         previous_max_difference = max_difference
         if np.isnan(difference_change):
             print("Stop worker process id: {0}".format(os.getpid()))
-            print(np.mean([previous_max_difference, max_difference]))
             break
     return clusters, centroids
 
