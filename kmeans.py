@@ -44,16 +44,16 @@ def move_centroids(clusters):
 
 
 def repeat_until_convergence(data, clusters, centroids):
-    previous_max_difference = 0
+    pre_max_diff = 0
     while True:
         old_centroids = centroids
         centroids = move_centroids(clusters)
         clusters = form_cluster(centroids, data)
         differences = map(lambda x, y: np.linalg.norm(x - y), old_centroids, centroids)
-        max_difference = max(differences)
-        difference_change = abs((max_difference - previous_max_difference) / np.mean([previous_max_difference, max_difference])) * 100
-        previous_max_difference = max_difference
-        if np.isnan(difference_change):
+        max_diff = max(differences)
+        diff_change = abs((max_diff - pre_max_diff) / np.mean([pre_max_diff, max_diff])) * 100
+        pre_max_diff = max_diff
+        if np.isnan(diff_change):
             print("Stop worker process id: {0}".format(os.getpid()))
             break
     return clusters, centroids
@@ -103,4 +103,7 @@ def main(argv):
     print("Done!")
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    if len(sys.argv) < 2:
+        main(1)
+    else:
+        main(sys.argv[1])

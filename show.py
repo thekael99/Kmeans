@@ -31,9 +31,12 @@ def showGeneral(label):
 
 
 
-# data = loadData("centroids.csv", False)
-# showDigit(data)
 
-for i in range(10):
-    data = loadData(str(i) + ".csv", False)
-    showDigit(data[:120])
+def main():
+    # data = loadData("centroids.csv", False)
+    # showDigit(data)
+
+    for i in range(10):
+        data = loadData(str(i) + ".csv", False)
+        showDigit(data[:120])
+main()
